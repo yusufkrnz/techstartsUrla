@@ -76,7 +76,7 @@ export function LiveCall() {
 
           <div className="relative h-[360px] overflow-hidden bg-[linear-gradient(180deg,#a9d8f5_0%,#2f7fd6_45%,#0b3a8a_75%,#04122e_100%)] sm:h-[427px] lg:col-span-2">
             <div className="absolute top-0 left-1/2 -translate-x-1/2">
-              <Notch time={liveMeeting.time} battery={liveMeeting.battery} className="w-[280px]">
+              <Notch time={liveMeeting.time} battery={liveMeeting.battery} width={300}>
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={tab.id}

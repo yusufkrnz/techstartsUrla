@@ -1,4 +1,5 @@
 import type { AfterItem, LiveTab, PreCallCard, SectionIntro } from "@/types/landing";
+import { BRAND } from "@/data/brand";
 
 /* ---------- Before the call ---------- */
 
@@ -18,14 +19,14 @@ export const preCallBrief = {
   tabs: ["Call", "Company", "People"],
   bullets: [
     "Expansion call with Laura Kim and Daniel Ross; the Acme deal is in Proposal stage.",
-    "Acme is piloting Sonar with 4 users (2 SDRs, 2 AEs) before deciding on a wider rollout.",
+    `Acme is piloting ${BRAND} with 4 users (2 SDRs, 2 AEs) before deciding on a wider rollout.`,
     "Still open: pilot feedback, recording access, pricing and the decision date.",
   ],
 };
 
 export const preCallPlan = {
   leadLabel: "Open with",
-  lead: "How Sonar cuts manual account prep and gives managers a clear view of every deal.",
+  lead: `How ${BRAND} cuts manual account prep and gives managers a clear view of every deal.`,
   questionsLabel: "Questions to ask",
   openCount: "3 open",
   questions: [
@@ -38,7 +39,7 @@ export const preCallNotch = {
   time: "04:35",
   battery: "58%",
   leadLabel: "Open with",
-  lead: "How Sonar cuts manual account prep and gives managers a clear view of every deal.",
+  lead: `How ${BRAND} cuts manual account prep and gives managers a clear view of every deal.`,
   questionsLabel: "Your questions",
   questions: [
     { text: "What has to happen to launch before Q4?", done: true },

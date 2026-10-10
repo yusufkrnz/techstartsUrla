@@ -1,4 +1,5 @@
 import type { Industry } from "@/types/landing";
+import { BRAND } from "@/data/brand";
 
 export const industriesIntro = {
   lead: "Designed for",
@@ -46,6 +47,6 @@ export const industries: Industry[] = [
 
 export const industriesFallback = {
   title: "Don’t see your industry?",
-  body: "Sonar learns any product from the material you already have.",
+  body: `${BRAND} learns any product from the material you already have.`,
   comingSoon: "Coming soon",
 };

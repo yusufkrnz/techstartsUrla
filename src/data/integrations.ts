@@ -1,4 +1,5 @@
 import type { FooterColumn, IntegrationTile } from "@/types/landing";
+import { BRAND } from "@/data/brand";
 
 export const integrationsIntro = {
   eyebrow: "Integrations",
@@ -34,11 +35,11 @@ export const integrationTiles: IntegrationTile[] = [
 ];
 
 export const footer = {
-  tagline: "Live guidance for the conversations that move deals forward.",
+  tagline: "An extra ear on every call — live guidance for the conversations that move deals forward.",
   askAi: "Summarise this page with AI",
   aiTargets: ["ChatGPT", "Claude", "Perplexity", "Gemini", "Grok"],
   soon: "Soon",
-  copyright: "Sonar © 2026",
+  copyright: `${BRAND} © 2026`,
   legal: ["Privacy", "Terms", "Cookie settings", "Security", "LinkedIn", "Email"],
   columns: [
     {
@@ -47,7 +48,7 @@ export const footer = {
         { label: "Pre-call briefs", href: "#pre-call" },
         { label: "Live assist", href: "#capabilities" },
         { label: "Post-call automation", href: "#after-call" },
-        { label: "Sonar Metrics", href: "#metrics" },
+        { label: `${BRAND} Metrics`, href: "#metrics" },
         { label: "Integrations", href: "#integrations" },
       ],
     },

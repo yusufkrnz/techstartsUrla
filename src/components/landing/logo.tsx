@@ -1,13 +1,12 @@
+import { Ear } from "lucide-react";
 import { site } from "@/data/site";
 import { cn } from "@/lib/utils";
 
-/** Geçici marka işareti — gerçek logo gelince burası değişir */
+/** Marka işareti: kulak ("Qulaq" = kulak) — gerçek logo gelince burası değişir */
 export function LogoMark({ className }: { className?: string }) {
   return (
     <span className={cn("grid size-5 place-items-center rounded-full bg-lime", className)}>
-      <svg viewBox="0 0 16 16" className="size-3" fill="none" aria-hidden>
-        <path d="M3 9.5c1.6-4 4-5.5 10-6-1 5.5-3.5 8.6-8.5 9.5" stroke="#1b1b1b" strokeWidth="1.8" strokeLinecap="round" />
-      </svg>
+      <Ear className="size-3 text-ink" strokeWidth={2.4} aria-hidden />
     </span>
   );
 }

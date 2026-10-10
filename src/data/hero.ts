@@ -1,10 +1,11 @@
 import type { NotchMessage } from "@/types/landing";
+import { BRAND } from "@/data/brand";
 
 export const hero = {
   titleLines: ["Have the answer", "on every sales call"],
-  subtitleBefore: "Your team’s knowledge, surfaced",
+  subtitleBefore: `${BRAND} listens with you and surfaces your team’s answers`,
   subtitleHighlight: "live",
-  subtitleAfter: "during every customer call.",
+  subtitleAfter: "on every call.",
   subtitleSecondLine: "Tackle technical questions, sharpen discovery and always know your next move.",
   partnersLabel: "Works with",
   partners: ["Zoom", "Google Meet", "Microsoft Teams"],
@@ -32,7 +33,7 @@ export const heroNotchFeed: NotchMessage[] = [
   {
     label: "Context",
     tone: "plain",
-    text: "Laura’s team already records calls, but reps still prep by hand. Position Sonar as the live layer that answers during the meeting.",
+    text: `Laura’s team already records calls, but reps still prep by hand. Position ${BRAND} as the live layer that answers during the meeting.`,
   },
   {
     label: "Ask next",

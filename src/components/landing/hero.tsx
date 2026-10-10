@@ -2,7 +2,7 @@
 
 import { motion } from "motion/react";
 import { Apple, BatteryFull, Mic, MonitorUp, Search, Smile, Users, Video, Wifi, MessageSquare, ShieldCheck } from "lucide-react";
-import { Notch, NotchFeed } from "@/components/landing/notch";
+import { NotchFeed } from "@/components/landing/notch";
 import { EASE, Pill } from "@/components/landing/primitives";
 import { hero, heroMock, heroNotchFeed } from "@/data/hero";
 import { site } from "@/data/site";
@@ -95,9 +95,7 @@ function DesktopMock() {
 
       {/* Notch */}
       <div className="absolute top-0 left-1/2 z-10 -translate-x-1/2">
-        <Notch time={heroMock.notch.time} battery={heroMock.notch.battery}>
-          <NotchFeed messages={heroNotchFeed} />
-        </Notch>
+        <NotchFeed time={heroMock.notch.time} battery={heroMock.notch.battery} messages={heroNotchFeed} width={260} />
       </div>
 
       {/* Toplantı penceresi */}

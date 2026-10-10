@@ -1,10 +1,11 @@
 import type { Testimonial } from "@/types/landing";
+import { BRAND } from "@/data/brand";
 
 // Yer tutucu alıntılar (kurgusal kişi/şirketler) — gerçek müşteri alıntıları gelince değiştirilecek.
 export const testimonials = {
   technical: {
     quote:
-      "When a CTO goes deep on architecture, Sonar hands our reps the exact detail they need — no more “let me get back to you.”",
+      `When a CTO goes deep on architecture, ${BRAND} hands our reps the exact detail they need — no more “let me get back to you.”`,
     name: "Ethan Brooks",
     role: "Head of Sales at Contoso",
     initials: "EB",
@@ -28,7 +29,7 @@ export const testimonials = {
   },
   founder: {
     quote:
-      "As a founder I jump between sales, hiring and investor calls all day. Sonar keeps the context for every one of them, so I never walk in cold.",
+      `As a founder I jump between sales, hiring and investor calls all day. ${BRAND} keeps the context for every one of them, so I never walk in cold.`,
     name: "Deniz Aksoy",
     role: "Co-founder of Litware",
     initials: "DA",

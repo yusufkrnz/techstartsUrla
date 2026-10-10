@@ -107,8 +107,8 @@ function PlanMock() {
 
 function NotchMock() {
   return (
-    <div className="flex h-full items-start justify-center border-l border-line bg-white pt-4">
-      <Notch time={preCallNotch.time} battery={preCallNotch.battery} className="w-[90%] rounded-[18px]">
+    <div className="flex h-full items-start justify-center border-l border-line bg-white">
+      <Notch time={preCallNotch.time} battery={preCallNotch.battery} width={280}>
         <div className="rounded-lg bg-white/[0.06] p-2">
           <div className="text-[8px] font-semibold tracking-wider text-[#c9f25a] uppercase">{preCallNotch.leadLabel}</div>
           <p className="mt-1 text-[10px] leading-snug">{preCallNotch.lead}</p>

@@ -1,15 +1,16 @@
 import type { CallLine, FeatureCard, MetricGroup, SectionIntro, TimelineDot } from "@/types/landing";
+import { BRAND } from "@/data/brand";
 
 export const metricsIntro: SectionIntro = {
-  eyebrow: "Sonar Metrics",
+  eyebrow: `${BRAND} Metrics`,
   lead: "A single view for sales leaders:",
   highlight: "every call, scored and searchable.",
-  cta: { label: "Explore Sonar Metrics", href: "#" },
+  cta: { label: `Explore ${BRAND} Metrics`, href: "#" },
 };
 
 export const metricsCall = {
   date: "Oct 9 at 12:30 PM",
-  title: "Sonar Demo | Jonas Weber & Elif Arslan",
+  title: `${BRAND} Demo | Jonas Weber & Elif Arslan`,
   summary: "Jonas wants answers on audit trails and will check internal appetite before a follow-up on Monday.",
   meta: [
     { label: "Rep", value: "Elif Arslan" },
@@ -52,12 +53,12 @@ export const metricsTranscript: CallLine[] = [
   { speaker: "them", name: "Jonas", text: "Of course. It’s been a hectic week, so this is a nice break." },
   { speaker: "you", name: "Elif", text: "Glad to hear it. How’s the quarter shaping up for your team?" },
   { speaker: "them", name: "Jonas", text: "Busy — we’re onboarding six new reps, which is partly why I took this call." },
-  { speaker: "you", name: "Elif", text: "Great timing. Want me to start with how ramp works in Sonar?" },
+  { speaker: "you", name: "Elif", text: `Great timing. Want me to start with how ramp works in ${BRAND}?` },
   { speaker: "them", name: "Jonas", text: "Please. Ramp speed is the thing my VP keeps asking about." },
   { speaker: "you", name: "Elif", text: "Perfect, let me share my screen." },
 ];
 
-export const metricsAsk = { placeholder: "Ask Sonar", shortcut: "⌘ K" };
+export const metricsAsk = { placeholder: `Ask ${BRAND}`, shortcut: "⌘ K" };
 
 export const metricsTimeline = {
   lanes: ["Rep", "Speaking", "Objection", "Insights", "Question", "Next step"],
@@ -95,7 +96,7 @@ export const metricsFeatures: FeatureCard[] = [
   },
   {
     title: "Scorecards in your words",
-    body: "Describe what a great call looks like for your team. Sonar grades every call against it, alongside built-in scores for discovery, objections and next steps.",
+    body: `Describe what a great call looks like for your team. ${BRAND} grades every call against it, alongside built-in scores for discovery, objections and next steps.`,
   },
   {
     title: "Dashboards from plain questions",
