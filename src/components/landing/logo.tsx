@@ -1,11 +1,9 @@
-import type { StaticImageData } from "next/image";
-import logoFile from "../../../public/logo/qullaq.svg";
 import { site } from "@/data/site";
 import { cn } from "@/lib/utils";
 
 // Logo doğrudan public/logo/qullaq.svg dosyasından gelir; CSS mask ile bulunduğu yerin
-// yazı rengini alır (navbar'da siyah, footer'da beyaz). Statik import basePath'i de kendisi ekler.
-const logoUrl = `url(${(logoFile as StaticImageData).src})`;
+// yazı rengini alır (navbar'da siyah, footer'da beyaz). GitHub Pages alt yolu için base path eklenir.
+const logoUrl = `url(${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/logo/qullaq.svg)`;
 
 export function LogoMark({ className }: { className?: string }) {
   return (
