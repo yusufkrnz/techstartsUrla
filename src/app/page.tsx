@@ -16,8 +16,8 @@ export default function Home() {
     <>
       <AnnouncementBar />
       <Navbar />
-      <SideNav />
-      <main className="flex-1">
+      <main className="relative flex-1">
+        <SideNav />
         <Hero />
         <Spacer className="border-t" />
         <QuoteStrip t={testimonials.technical} accent="#c084fc" />

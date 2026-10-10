@@ -9,8 +9,6 @@ const aiIcons: LucideIcon[] = [Bot, Sparkles, Search, Atom, Zap];
 export function Footer() {
   return (
     <footer className="relative min-h-[calc(100svh-3.5rem)] w-full overflow-hidden bg-night text-white">
-      {/* Turuncu ışımadan itibaren koyu: sol menü burada açık renge döner */}
-      <div data-nav-theme="dark" aria-hidden className="pointer-events-none absolute inset-x-0 top-[110px] bottom-0" />
       {/* Üstteki beyaz → turuncu → siyah ışıma */}
       <div
         aria-hidden

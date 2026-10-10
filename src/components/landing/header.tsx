@@ -2,7 +2,7 @@
 
 import { AnimatePresence, motion } from "motion/react";
 import { Apple, Menu, X } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { LogoMark, Logo } from "@/components/landing/logo";
 import { Pill } from "@/components/landing/primitives";
 import { site } from "@/data/site";
@@ -104,12 +104,16 @@ export function Navbar() {
   );
 }
 
-/** Sol kenardaki sabit bölüm listesi; görünür bölümü koyu gösterir */
-/** Sol menünün ekrandaki dikey konumu (px) ve arka plan kontrolünün yapıldığı orta çizgisi */
+/** Sol menünün yapıştığı yükseklik (px) */
 const SIDE_NAV_TOP = 180;
-const SIDE_NAV_PROBE = SIDE_NAV_TOP + 65;
 
+/**
+ * Sol kenardaki bölüm listesi. <main> boyunca uzanan bir rayın içinde sticky durur:
+ * sayfayı takip eder, içerik bitince (footer'dan önce) orada kalır. Yalnızca kolonun
+ * solunda yeterli boşluk olan genişliklerde (≥1440px) görünür.
+ */
 export function SideNav() {
+  const navRef = useRef<HTMLElement>(null);
   const [active, setActive] = useState<string | null>(null);
   const [onDark, setOnDark] = useState(false);
 
@@ -127,56 +131,67 @@ export function SideNav() {
     return () => observer.disconnect();
   }, []);
 
-  // Menünün tam arkasından koyu bir alan (data-nav-theme="dark") geçiyorsa yazılar açık renge döner
+  // Menünün o anki konumunun arkasında koyu bir alan (data-nav-theme="dark") varsa yazılar açık renge döner
   useEffect(() => {
-    let observer: IntersectionObserver | null = null;
-    const setup = () => {
-      observer?.disconnect();
-      const under = new Set<Element>();
-      observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((e) => (e.isIntersecting ? under.add(e.target) : under.delete(e.target)));
-          setOnDark(under.size > 0);
-        },
-        { rootMargin: `-${SIDE_NAV_PROBE}px 0px -${Math.max(0, window.innerHeight - SIDE_NAV_PROBE - 1)}px 0px` },
+    const markers = Array.from(document.querySelectorAll("[data-nav-theme='dark']"));
+    let frame = 0;
+    const check = () => {
+      frame = 0;
+      const nav = navRef.current;
+      if (!nav) return;
+      const r = nav.getBoundingClientRect();
+      const mid = r.top + r.height / 2;
+      setOnDark(
+        markers.some((m) => {
+          const b = m.getBoundingClientRect();
+          return b.top <= mid && b.bottom >= mid;
+        }),
       );
-      document.querySelectorAll("[data-nav-theme='dark']").forEach((el) => observer?.observe(el));
     };
-    setup();
-    window.addEventListener("resize", setup);
+    const schedule = () => {
+      if (!frame) frame = requestAnimationFrame(check);
+    };
+    schedule();
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
     return () => {
-      observer?.disconnect();
-      window.removeEventListener("resize", setup);
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
     };
   }, []);
 
   return (
-    <nav
-      aria-label="Sections"
-      style={{ top: SIDE_NAV_TOP }}
-      className={cn(
-        "fixed right-[calc(50%+544px+40px)] z-40 hidden flex-col items-end gap-2.5 transition-opacity duration-300 xl:flex",
-        active ? "opacity-100" : "pointer-events-none opacity-0",
-      )}
-    >
-      {site.sideNav.map((s) => (
-        <a
-          key={s.id}
-          href={`#${s.id}`}
-          className={cn(
-            "font-mono text-[12px] leading-3 tracking-[0.12em] uppercase transition-colors duration-300",
-            active === s.id
-              ? onDark
-                ? "text-white"
-                : "text-ink"
-              : onDark
-                ? "text-white/35 hover:text-white/75"
-                : "text-black/25 hover:text-black/60",
-          )}
-        >
-          {s.label}
-        </a>
-      ))}
-    </nav>
+    <div className="pointer-events-none absolute inset-y-0 right-[calc(50%+584px)] z-40 hidden min-[1440px]:block">
+      <nav
+        ref={navRef}
+        aria-label="Sections"
+        inert={!active}
+        style={{ top: SIDE_NAV_TOP }}
+        className={cn(
+          "sticky flex flex-col items-end gap-2.5 transition-opacity duration-300",
+          active ? "pointer-events-auto opacity-100" : "opacity-0",
+        )}
+      >
+        {site.sideNav.map((s) => (
+          <a
+            key={s.id}
+            href={`#${s.id}`}
+            className={cn(
+              "font-mono text-[12px] leading-3 tracking-[0.12em] whitespace-nowrap uppercase transition-colors duration-300",
+              active === s.id
+                ? onDark
+                  ? "text-white"
+                  : "text-ink"
+                : onDark
+                  ? "text-white/35 hover:text-white/75"
+                  : "text-black/25 hover:text-black/60",
+            )}
+          >
+            {s.label}
+          </a>
+        ))}
+      </nav>
+    </div>
   );
 }
