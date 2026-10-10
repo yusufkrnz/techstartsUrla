@@ -1,5 +1,6 @@
 import { Bot, Sparkles, Search, Atom, Zap, type LucideIcon } from "lucide-react";
 import { Logo } from "@/components/landing/logo";
+import { PixelWordmark } from "@/components/landing/pixel-wordmark";
 import { footer } from "@/data/integrations";
 import { hero } from "@/data/hero";
 import { site } from "@/data/site";
@@ -71,13 +72,8 @@ export function Footer() {
           ))}
         </div>
 
-        {/* Dev, soluk marka yazısı */}
-        <div
-          aria-hidden
-          className="pointer-events-none -mb-[0.32em] text-center font-heading text-[26vw] leading-none text-white/[0.04] select-none lg:text-[300px]"
-        >
-          {site.name}
-        </div>
+        {/* Dev, soluk marka yazısı — harflerin içinde hareketli pikseller */}
+        <PixelWordmark text={site.name} />
 
         <div className="absolute inset-x-0 bottom-0 flex flex-col gap-3 border-t border-white/10 px-6 py-4 text-[11px] text-white/55 sm:flex-row sm:justify-between">
           <span>{footer.copyright}</span>
