@@ -9,7 +9,7 @@ const aiIcons: LucideIcon[] = [Bot, Sparkles, Search, Atom, Zap];
 
 export function Footer() {
   return (
-    <footer className="relative min-h-[calc(100svh-3.5rem)] w-full overflow-hidden bg-night text-white">
+    <footer className="relative flex min-h-[calc(100svh-3.5rem)] w-full flex-col overflow-hidden bg-night text-white">
       {/* Üstteki beyaz → turuncu → siyah ışıma */}
       <div
         aria-hidden
@@ -17,7 +17,7 @@ export function Footer() {
         style={{ background: "linear-gradient(180deg, #fff 0%, #ffd9b8 12%, #ff7a1a 35%, #c2410c 55%, #3b0a00 80%, #080100 100%)" }}
       />
 
-      <div className="relative mx-auto w-[calc(100%-2.5rem)] max-w-[1088px] border-x border-white/10 lg:w-[calc(100%-7rem)]">
+      <div className="relative mx-auto flex w-[calc(100%-2.5rem)] max-w-[1088px] flex-1 flex-col border-x border-white/10 lg:w-[calc(100%-7rem)]">
         <div className="flex h-[320px] items-end justify-end gap-3 px-6 pb-6">
           <span className="max-w-[110px] text-[10px] leading-tight text-white/70">{footer.askAi}</span>
           {footer.aiTargets.map((name, i) => {
@@ -72,10 +72,10 @@ export function Footer() {
           ))}
         </div>
 
-        {/* Dev, soluk marka yazısı — harflerin içinde hareketli pikseller */}
-        <PixelWordmark text={site.name} />
+        {/* Dev, soluk marka yazısı — harflerin içinde hareketli pikseller; boş alan olursa en alta yaslanır */}
+        <PixelWordmark text={site.name} className="mt-auto" />
 
-        <div className="absolute inset-x-0 bottom-0 flex flex-col gap-3 border-t border-white/10 px-6 py-4 text-[11px] text-white/55 sm:flex-row sm:justify-between">
+        <div className="flex flex-col gap-3 border-t border-white/10 px-6 py-4 text-[11px] text-white/55 sm:flex-row sm:justify-between">
           <span>{footer.copyright}</span>
           <div className="flex flex-wrap gap-4">
             {footer.legal.map((l) => (

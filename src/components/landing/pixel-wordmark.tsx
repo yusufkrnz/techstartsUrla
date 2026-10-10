@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { fbm } from "@/lib/noise";
+import { cn } from "@/lib/utils";
 
 const FRAME_MS = 1000 / 30;
 /** Eskiz yazının opaklığı — öncekiyle aynı (text-white/[0.04]) */
@@ -14,7 +15,7 @@ const GLOW_ALPHA = 0.22;
  * gürültüyle akan turuncu pikseller çizilir.
  * DOM'daki yazı şeffaftır, yalnızca boyutu/yerleşimi belirler.
  */
-export function PixelWordmark({ text }: { text: string }) {
+export function PixelWordmark({ text, className }: { text: string; className?: string }) {
   const boxRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -131,7 +132,10 @@ export function PixelWordmark({ text }: { text: string }) {
     <div
       ref={boxRef}
       aria-hidden
-      className="pointer-events-none relative -mb-[0.32em] text-center font-heading text-[26vw] leading-none text-transparent select-none lg:text-[300px]"
+      className={cn(
+        "pointer-events-none relative mb-[0.18em] text-center font-heading text-[26vw] leading-none text-transparent select-none lg:text-[300px]",
+        className,
+      )}
     >
       {text}
       <canvas ref={canvasRef} className="absolute inset-x-0 top-0 h-[130%] w-full" />
