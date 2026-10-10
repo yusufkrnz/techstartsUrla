@@ -1,7 +1,6 @@
-"use client";
-
 import { ArrowUpRight, Network } from "lucide-react";
-import { useEffect, useRef } from "react";
+import { BrandIcon } from "@/components/landing/brand-icons";
+import { PixelBlob } from "@/components/landing/pixel-blob";
 import { Column, Pill, Reveal } from "@/components/landing/primitives";
 import { SproutVisual } from "@/components/landing/visuals";
 import { integrationTiles, integrationsIntro } from "@/data/integrations";
@@ -9,13 +8,13 @@ import type { IntegrationTile } from "@/types/landing";
 
 const ACCENT = "#4d8c12";
 const COLS = 7;
-const PIXELS = 10;
+const ROWS = 5;
 
 export function Integrations() {
   // 7×5 ızgarada orta 3×3 alan başlık kartına ayrılır; kutuları sırayla yerleştir
   const cells: (IntegrationTile | "card" | null)[] = [];
   let k = 0;
-  for (let row = 0; row < 5; row++) {
+  for (let row = 0; row < ROWS; row++) {
     for (let col = 0; col < COLS; col++) {
       const inCard = row >= 1 && row <= 3 && col >= 2 && col <= 4;
       if (inCard) cells.push(row === 1 && col === 2 ? "card" : null);
@@ -65,39 +64,23 @@ function BrainCard() {
           <Pill cta={integrationsIntro.secondary} variant="light" className="text-[13px]" />
         </div>
       </Reveal>
-      <div className="absolute inset-x-0 bottom-0 h-[55%] bg-[radial-gradient(60%_60%_at_50%_100%,rgba(163,230,53,0.35),transparent)]" />
-      <SproutVisual className="absolute inset-x-0 bottom-0 h-[55%] w-full" />
+      <div className="absolute inset-x-0 bottom-0 h-[58%] bg-[radial-gradient(60%_70%_at_50%_100%,rgba(190,240,110,0.45),transparent)]" />
+      <SproutVisual className="absolute inset-x-0 bottom-0 h-[58%] w-full" />
     </div>
   );
 }
 
 function Tile({ tile }: { tile: IntegrationTile }) {
+  if (tile.kind === "blob") {
+    return (
+      <div className="aspect-square overflow-hidden border-r border-b border-line">
+        <PixelBlob palette={tile.palette} seed={tile.seed} />
+      </div>
+    );
+  }
   return (
-    <div className="grid aspect-square place-items-center border-r border-b border-line transition-colors hover:bg-paper">
-      {tile.kind === "app" ? (
-        <span title={tile.name} className="text-[15px] font-bold tracking-[-0.02em]" style={{ color: tile.color }}>
-          {tile.glyph}
-        </span>
-      ) : (
-        <PixelBlob from={tile.from} to={tile.to} />
-      )}
+    <div className="group grid aspect-square place-items-center border-r border-b border-line transition-colors hover:bg-paper">
+      <BrandIcon icon={tile.icon} name={tile.name} className="transition-transform duration-300 group-hover:scale-110" />
     </div>
   );
-}
-
-/** Küçük canvas'a radyal gradyan çizip pikselli büyütür — kaynaktaki "pixel blob" kutuları */
-function PixelBlob({ from, to }: { from: string; to: string }) {
-  const ref = useRef<HTMLCanvasElement>(null);
-
-  useEffect(() => {
-    const ctx = ref.current?.getContext("2d");
-    if (!ctx) return;
-    const g = ctx.createRadialGradient(PIXELS / 2, PIXELS / 2, 0, PIXELS / 2, PIXELS / 2, PIXELS / 1.4);
-    g.addColorStop(0, to);
-    g.addColorStop(1, from);
-    ctx.fillStyle = g;
-    ctx.fillRect(0, 0, PIXELS, PIXELS);
-  }, [from, to]);
-
-  return <canvas ref={ref} width={PIXELS} height={PIXELS} className="size-full [image-rendering:pixelated]" aria-hidden />;
 }

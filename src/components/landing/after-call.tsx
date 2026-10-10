@@ -14,7 +14,7 @@ export function AfterCall() {
     <section id="after-call" className="relative w-full scroll-mt-24 border-b border-line">
       <Column>
         <SectionHeading intro={afterIntro} color={ACCENT} icon={<FileCheck2 className="size-3" />} />
-        <div className="relative h-[180px] bg-gradient-to-b from-white to-[#ecfbf1] sm:h-[250px]">
+        <div className="relative h-[220px] bg-gradient-to-b from-white to-[#ecfbf1] sm:h-[330px]">
           <FanVisual className="absolute inset-0 size-full" />
         </div>
 

@@ -9,8 +9,17 @@ export const integrationsIntro = {
   secondary: { label: "Talk to sales", href: "#" },
 };
 
-const app = (name: string, glyph: string, color: string): IntegrationTile => ({ kind: "app", name, glyph, color });
-const blob = (from: string, to: string): IntegrationTile => ({ kind: "blob", from, to });
+const app = (name: string, icon: string): IntegrationTile => ({ kind: "app", name, icon });
+const blob = (palette: string[], seed: number): IntegrationTile => ({ kind: "blob", palette, seed });
+
+/** Piksel bulut paletleri: zemin rengi → çekirdek rengi */
+const blobPalettes = {
+  blue: ["#ffffff", "#c7d4fb", "#5d82ee", "#2350e0", "#1235c8"],
+  green: ["#ffffff", "#eef06a", "#b5d93a", "#4f9a2e", "#1d4a1a"],
+  purple: ["#ffffff", "#ddc8fb", "#a575f2", "#7c3aed", "#5b16c9"],
+  orange: ["#ff6714", "#ff8c4d", "#ffc39c", "#fff3ea", "#ffffff"],
+  pink: ["#ffffff", "#e9c4f2", "#d59ae6", "#f4b7c5", "#fff1ef"],
+};
 
 /**
  * 7 sütun × 5 satır ızgara. Ortadaki 3×3 alan (satır 2-4, sütun 3-5) başlık kartına ayrılır,
@@ -18,20 +27,20 @@ const blob = (from: string, to: string): IntegrationTile => ({ kind: "blob", fro
  */
 export const integrationTiles: IntegrationTile[] = [
   // satır 1
-  app("Zoom", "zoom", "#2d8cff"), app("Salesforce", "SF", "#00a1e0"), app("Meet", "M", "#00ac47"),
-  blob("#1d4ed8", "#93c5fd"), app("HubSpot", "H", "#ff7a59"), app("Notion", "N", "#111111"), app("Drive", "D", "#1fa463"),
+  app("Zoom", "zoom"), app("Gmail", "gmail"), app("Google Meet", "googlemeet"),
+  blob(blobPalettes.blue, 11), app("HubSpot", "hubspot"), app("Notion", "notion"), app("Google Drive", "googledrive"),
   // satır 2
-  app("Slack", "#", "#e01e5a"), app("Teams", "T", "#5b5fc7"),
-  blob("#a3e635", "#14532d"), app("Calendly", "cal", "#111111"),
+  app("Google Calendar", "googlecalendar"), app("Linear", "linear"),
+  blob(blobPalettes.green, 23), app("Cal.com", "caldotcom"),
   // satır 3
-  app("Telegram", "✈", "#229ed9"), app("Otter", "ooo", "#6b7280"),
-  app("OneDrive", "☁", "#0f78d4"), blob("#7c3aed", "#e9d5ff"),
+  app("Telegram", "telegram"), app("Odoo", "odoo"),
+  app("Dropbox", "dropbox"), blob(blobPalettes.purple, 37),
   // satır 4
-  app("Pipedrive", "p", "#1a7f37"), app("Linear", "L", "#111111"),
-  app("WhatsApp", "W", "#25d366"), app("Zapier", "⚡", "#5b21b6"),
+  app("Airtable", "airtable"), app("Jira", "jira"),
+  app("WhatsApp", "whatsapp"), app("Zapier", "zapier"),
   // satır 5
-  blob("#f97316", "#fff7ed"), app("Contacts", "◉", "#f97316"), app("Loom", "✺", "#7c3aed"),
-  app("Evernote", "E", "#00a82d"), app("Gmail", "G", "#ea4335"), blob("#f9a8d4", "#fff1f2"), app("Clay", "C", "#ea580c"),
+  blob(blobPalettes.orange, 41), app("Calendly", "calendly"), app("Loom", "loom"),
+  app("Evernote", "evernote"), app("Asana", "asana"), blob(blobPalettes.pink, 53), app("Zendesk", "zendesk"),
 ];
 
 export const footer = {

@@ -19,7 +19,7 @@ export function AnnouncementBar() {
           {/* Kesintisiz döngü için liste iki kez basılır; key her kopyada benzersiz */}
           {[...items, ...items].map((_, idx) => (
             <a key={idx} href="#" className="flex items-center gap-2 px-4 text-[13px] font-medium whitespace-nowrap text-ink">
-              <LogoMark className="size-4 bg-ink/10" />
+              <LogoMark className="size-3.5" />
               {site.announcement}
             </a>
           ))}

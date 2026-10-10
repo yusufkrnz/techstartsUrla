@@ -43,8 +43,10 @@ export type TimelineDot = { lane: number; at: number; kind: "objection" | "insig
 export type FeatureCard = { title: string; body: string };
 
 export type IntegrationTile =
-  | { kind: "app"; name: string; glyph: string; color: string }
-  | { kind: "blob"; from: string; to: string };
+  /** icon: simple-icons anahtarı (bkz. components/landing/brand-icons.tsx) */
+  | { kind: "app"; name: string; icon: string }
+  /** Kendi içinde akan piksel bulut: palet açıktan koyuya (zemin → çekirdek) */
+  | { kind: "blob"; palette: string[]; seed: number };
 
 export type FooterColumn = {
   title: string;
