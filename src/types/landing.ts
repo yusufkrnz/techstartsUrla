@@ -22,7 +22,12 @@ export type NotchMessage = { label: string; text: string; tone: "lime" | "amber"
 
 export type PreCallCard = { title: string; body: string };
 
-export type LiveTab = { id: string; title: string; notch: NotchMessage[] };
+/** caption: karşı tarafın o an söylediği cümle — notch bu cümleye cevap verir */
+export type LiveTab = { id: string; title: string; caption: string; notch: NotchMessage[] };
+
+export type MenuBarMock = { app: string; items: string[]; clock: string };
+export type Person = { name: string; initials: string };
+export type MeetingMock = { windowTitle: string; speaker: Person; self: Person; controls: string[]; endLabel: string };
 
 export type AfterItem = { label: string; icon: string };
 

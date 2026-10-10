@@ -105,8 +105,13 @@ export function Navbar() {
 }
 
 /** Sol kenardaki sabit bölüm listesi; görünür bölümü koyu gösterir */
+/** Sol menünün ekrandaki dikey konumu (px) ve arka plan kontrolünün yapıldığı orta çizgisi */
+const SIDE_NAV_TOP = 180;
+const SIDE_NAV_PROBE = SIDE_NAV_TOP + 65;
+
 export function SideNav() {
   const [active, setActive] = useState<string | null>(null);
+  const [onDark, setOnDark] = useState(false);
 
   useEffect(() => {
     const els = site.sideNav.map((s) => document.getElementById(s.id)).filter((el): el is HTMLElement => el !== null);
@@ -122,11 +127,35 @@ export function SideNav() {
     return () => observer.disconnect();
   }, []);
 
+  // Menünün tam arkasından koyu bir alan (data-nav-theme="dark") geçiyorsa yazılar açık renge döner
+  useEffect(() => {
+    let observer: IntersectionObserver | null = null;
+    const setup = () => {
+      observer?.disconnect();
+      const under = new Set<Element>();
+      observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => (e.isIntersecting ? under.add(e.target) : under.delete(e.target)));
+          setOnDark(under.size > 0);
+        },
+        { rootMargin: `-${SIDE_NAV_PROBE}px 0px -${Math.max(0, window.innerHeight - SIDE_NAV_PROBE - 1)}px 0px` },
+      );
+      document.querySelectorAll("[data-nav-theme='dark']").forEach((el) => observer?.observe(el));
+    };
+    setup();
+    window.addEventListener("resize", setup);
+    return () => {
+      observer?.disconnect();
+      window.removeEventListener("resize", setup);
+    };
+  }, []);
+
   return (
     <nav
       aria-label="Sections"
+      style={{ top: SIDE_NAV_TOP }}
       className={cn(
-        "fixed top-[180px] right-[calc(50%+544px+40px)] z-40 hidden flex-col items-end gap-2.5 transition-opacity duration-300 xl:flex",
+        "fixed right-[calc(50%+544px+40px)] z-40 hidden flex-col items-end gap-2.5 transition-opacity duration-300 xl:flex",
         active ? "opacity-100" : "pointer-events-none opacity-0",
       )}
     >
@@ -135,8 +164,14 @@ export function SideNav() {
           key={s.id}
           href={`#${s.id}`}
           className={cn(
-            "font-mono text-[12px] leading-3 tracking-[0.12em] uppercase transition-colors",
-            active === s.id ? "text-ink" : "text-black/25 hover:text-black/60",
+            "font-mono text-[12px] leading-3 tracking-[0.12em] uppercase transition-colors duration-300",
+            active === s.id
+              ? onDark
+                ? "text-white"
+                : "text-ink"
+              : onDark
+                ? "text-white/35 hover:text-white/75"
+                : "text-black/25 hover:text-black/60",
           )}
         >
           {s.label}

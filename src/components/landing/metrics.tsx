@@ -41,6 +41,8 @@ const dotColor: Record<TimelineDot["kind"] | "speaking" | "listening", string> =
 export function MetricsFade({ reverse }: { reverse?: boolean }) {
   return (
     <section aria-hidden className="relative w-full" style={{ background: `linear-gradient(${reverse ? "0deg" : "180deg"}, #fff 0%, ${BG} 100%)` }}>
+      {/* Geçişin koyu yarısı: sol menü burada açık renge döner */}
+      <div data-nav-theme="dark" className={cn("pointer-events-none absolute inset-x-0 h-1/2", reverse ? "top-0" : "bottom-0")} />
       <Column className="h-[120px] border-white/10 sm:h-[240px]" />
     </section>
   );
@@ -48,7 +50,7 @@ export function MetricsFade({ reverse }: { reverse?: boolean }) {
 
 export function Metrics() {
   return (
-    <section id="metrics" className="relative w-full scroll-mt-24 text-white" style={{ backgroundColor: BG }}>
+    <section id="metrics" data-nav-theme="dark" className="relative w-full scroll-mt-24 text-white" style={{ backgroundColor: BG }}>
       <Column className="border-white/10 pb-0">
         <SectionHeading intro={metricsIntro} color={ACCENT} icon={<BarChart3 className="size-3" />} dark />
 

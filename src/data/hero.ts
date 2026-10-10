@@ -1,4 +1,4 @@
-import type { NotchMessage } from "@/types/landing";
+import type { MeetingMock, MenuBarMock, NotchMessage } from "@/types/landing";
 import { BRAND } from "@/data/brand";
 
 export const hero = {
@@ -14,14 +14,16 @@ export const hero = {
 /** Hero'daki macOS + toplantı mock'u */
 export const heroMock = {
   menuBar: { app: "Meet", items: ["Edit", "Window", "Help"], clock: "Tue Oct 14  9:41 AM" },
-  windowTitle: "Video Meeting",
-  speaker: { name: "Laura Kim", initials: "LK" },
-  self: { name: "You", initials: "DA" },
+  meeting: {
+    windowTitle: "Video Meeting",
+    speaker: { name: "Laura Kim", initials: "LK" },
+    self: { name: "You", initials: "DA" },
+    controls: ["Mute", "Stop Video", "Participants", "Chat", "Share Screen", "Reactions"],
+    endLabel: "End",
+  },
   caption: "Can your engineer join us for a deeper dive next week?",
-  controls: ["Mute", "Stop Video", "Participants", "Chat", "Share Screen", "Reactions"],
-  endLabel: "End",
   notch: { time: "04:41", battery: "58%" },
-};
+} satisfies { menuBar: MenuBarMock; meeting: MeetingMock; caption: string; notch: { time: string; battery: string } };
 
 /** Notch içinde sırayla akan öneriler */
 export const heroNotchFeed: NotchMessage[] = [

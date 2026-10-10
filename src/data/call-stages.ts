@@ -1,4 +1,4 @@
-import type { AfterItem, LiveTab, PreCallCard, SectionIntro } from "@/types/landing";
+import type { AfterItem, LiveTab, MeetingMock, MenuBarMock, PreCallCard, SectionIntro } from "@/types/landing";
 import { BRAND } from "@/data/brand";
 
 /* ---------- Before the call ---------- */
@@ -69,6 +69,7 @@ export const liveTabDuration = 5000;
 export const liveTabs: LiveTab[] = [
   {
     id: "handle",
+    caption: "Honestly, the price feels high next to what we pay today.",
     title: "Answer any objection",
     notch: [
       { label: "Objection · Price", tone: "amber", text: "Reframe around ROI: pilot customers cut prep time by 4h per rep each week." },
@@ -77,6 +78,7 @@ export const liveTabs: LiveTab[] = [
   },
   {
     id: "web",
+    caption: "We actually just grew our EMEA sales team quite a bit.",
     title: "Search the web live",
     notch: [
       { label: "Web · Acme", tone: "plain", text: "Acme announced a 40-person EMEA sales team expansion last week." },
@@ -85,6 +87,7 @@ export const liveTabs: LiveTab[] = [
   },
   {
     id: "discovery",
+    caption: "We’d love to get a pilot going as soon as possible.",
     title: "Run sharper discovery",
     notch: [
       { label: "Ask next", tone: "amber", text: "Who else needs to approve before a pilot can start?" },
@@ -93,6 +96,7 @@ export const liveTabs: LiveTab[] = [
   },
   {
     id: "actions",
+    caption: "Could your engineer join a follow-up next week?",
     title: "Act without leaving the call",
     notch: [
       { label: "Done", tone: "lime", text: "Follow-up booked: Thu 2:00 PM with Laura Kim and an engineer." },
@@ -101,15 +105,19 @@ export const liveTabs: LiveTab[] = [
   },
 ];
 
+/** During panelindeki macOS ekranı: menü çubuğu, notch ve toplantı penceresi */
 export const liveMeeting = {
   time: "04:41",
   battery: "58%",
-  title: "Acme security review",
-  date: "Tuesday, Oct 14",
-  slot: "2:00 PM – 2:30 PM",
-  platform: "Video call",
-  attendee: "Laura Kim",
-};
+  menuBar: { app: "Meet", items: ["Edit", "View", "Window", "Help"], clock: "Tue Oct 14  2:12 PM" },
+  meeting: {
+    windowTitle: "Acme security review — Video call",
+    speaker: { name: "Laura Kim", initials: "LK" },
+    self: { name: "You", initials: "DA" },
+    controls: ["Mute", "Stop Video", "Participants", "Chat", "Share Screen", "Reactions"],
+    endLabel: "End",
+  },
+} satisfies { time: string; battery: string; menuBar: MenuBarMock; meeting: MeetingMock };
 
 /* ---------- After the call ---------- */
 

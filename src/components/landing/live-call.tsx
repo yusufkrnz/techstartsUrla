@@ -3,7 +3,8 @@
 import { AnimatePresence, motion } from "motion/react";
 import { Globe, ListTodo, MessageSquareQuote, Search, Zap, type LucideIcon } from "lucide-react";
 import { useEffect, useState } from "react";
-import { NotchCard, NotchPanel } from "@/components/landing/notch";
+import { MacMenuBar, MeetingWindow } from "@/components/landing/mac-mock";
+import { Notch, NotchCard } from "@/components/landing/notch";
 import { Column, Pill, SectionHeading } from "@/components/landing/primitives";
 import { HelixVisual } from "@/components/landing/visuals";
 import { liveIntro, liveMeeting, liveTabDuration, liveTabs } from "@/data/call-stages";
@@ -74,9 +75,11 @@ export function LiveCall() {
             </div>
           </div>
 
-          <div className="relative h-[360px] overflow-hidden bg-[linear-gradient(180deg,#a9d8f5_0%,#2f7fd6_45%,#0b3a8a_75%,#04122e_100%)] sm:h-[427px] lg:col-span-2">
-            <div className="absolute top-0 left-1/2 -translate-x-1/2">
-              <NotchPanel time={liveMeeting.time} battery={liveMeeting.battery} className="w-[280px]">
+          {/* Gerçek ekran mock'u: duvar kâğıdı + menü çubuğu + omuzlu notch + toplantı penceresi */}
+          <div className="relative h-[380px] overflow-hidden bg-[linear-gradient(180deg,#a9d8f5_0%,#2f7fd6_45%,#0b3a8a_75%,#04122e_100%)] sm:h-[427px] lg:col-span-2">
+            <MacMenuBar menu={liveMeeting.menuBar} />
+            <div className="absolute top-0 left-1/2 z-20 -translate-x-1/2">
+              <Notch time={liveMeeting.time} battery={liveMeeting.battery} width={300}>
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={tab.id}
@@ -91,18 +94,14 @@ export function LiveCall() {
                     ))}
                   </motion.div>
                 </AnimatePresence>
-              </NotchPanel>
+              </Notch>
             </div>
-            <div className="absolute right-4 bottom-4 left-4 rounded-xl bg-white/10 p-3 text-white backdrop-blur-md sm:right-auto sm:w-[260px]">
-              <div className="text-[13px] font-semibold">{liveMeeting.title}</div>
-              <div className="mt-1 text-[11px] text-white/70">
-                {liveMeeting.date} · {liveMeeting.slot}
-              </div>
-              <div className="mt-2 flex items-center justify-between text-[11px] text-white/80">
-                <span>{liveMeeting.platform}</span>
-                <span>{liveMeeting.attendee}</span>
-              </div>
-            </div>
+            <MeetingWindow
+              meeting={liveMeeting.meeting}
+              caption={tab.caption}
+              compact
+              className="absolute bottom-5 left-1/2 w-[88%] max-w-[560px] -translate-x-1/2"
+            />
           </div>
         </div>
       </Column>

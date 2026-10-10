@@ -84,35 +84,6 @@ export function Notch({ time, battery, open = true, width = 260, children }: Not
   );
 }
 
-/** Omuzsuz, düz notch paneli — During the Call bölümünde kullanılan ilk tasarım */
-export function NotchPanel({
-  time,
-  battery,
-  className,
-  children,
-}: {
-  time: string;
-  battery: string;
-  className?: string;
-  children: ReactNode;
-}) {
-  return (
-    <div className={cn("w-[248px] rounded-b-[22px] bg-black px-3 pt-2 pb-3 text-white shadow-2xl", className)}>
-      <div className="flex items-center justify-between text-[9px] font-semibold">
-        <span className="flex items-center gap-1">
-          {time}
-          <span className="size-1 rounded-full bg-[#22c55e]" />
-        </span>
-        <span className="flex items-center gap-1.5">
-          {battery}
-          <span className="h-1.5 w-6 rounded-full bg-gradient-to-r from-[#22c55e] via-[#facc15] to-[#ef4444]" />
-        </span>
-      </div>
-      <div className="mt-2">{children}</div>
-    </div>
-  );
-}
-
 export function NotchCard({ message }: { message: NotchMessage }) {
   return (
     <div className="rounded-lg bg-white/[0.06] px-2.5 py-2">
