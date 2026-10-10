@@ -1,18 +1,17 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { fbm, hash2 } from "@/lib/noise";
+import { fbm } from "@/lib/noise";
 
 const FRAME_MS = 1000 / 30;
 /** Eskiz yazının opaklığı — öncekiyle aynı (text-white/[0.04]) */
 const SKETCH_ALPHA = 0.04;
 /** Harf içindeki turuncu parıltının en yüksek opaklığı */
 const GLOW_ALPHA = 0.22;
-const SPARK_ALPHA = 0.35;
 
 /**
  * Footer'daki dev marka yazısı: soluk eskiz yazı aynen kalır, harflerin içinde
- * gürültüyle akan pikseller ve ara ara yanıp sönen kıvılcımlar çizilir.
+ * gürültüyle akan turuncu pikseller çizilir.
  * DOM'daki yazı şeffaftır, yalnızca boyutu/yerleşimi belirler.
  */
 export function PixelWordmark({ text }: { text: string }) {
@@ -50,11 +49,9 @@ export function PixelWordmark({ text }: { text: string }) {
         for (let x = 0; x < cols; x++) {
           if (!mask[y * cols + x]) continue;
           const n = fbm(x * 0.07 + t * 0.22, y * 0.07 - t * 0.12, 7);
-          const glow = Math.min(1, Math.max(0, (n - 0.48) / 0.3)) * GLOW_ALPHA;
-          const spark = hash2(x, y, Math.floor(t * 3)) > 0.993;
-          const alpha = spark ? SPARK_ALPHA : glow;
+          const alpha = Math.min(1, Math.max(0, (n - 0.48) / 0.3)) * GLOW_ALPHA;
           if (alpha < 0.012) continue;
-          ctx.fillStyle = spark ? `rgba(255,236,210,${alpha})` : `rgba(255,128,48,${alpha})`;
+          ctx.fillStyle = `rgba(255,128,48,${alpha})`;
           ctx.fillRect(x * cell, y * cell, cell - 1, cell - 1);
         }
       }
