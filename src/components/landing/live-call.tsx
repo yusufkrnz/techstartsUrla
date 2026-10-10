@@ -3,7 +3,7 @@
 import { AnimatePresence, motion } from "motion/react";
 import { Globe, ListTodo, MessageSquareQuote, Search, Zap, type LucideIcon } from "lucide-react";
 import { useEffect, useState } from "react";
-import { Notch, NotchCard } from "@/components/landing/notch";
+import { NotchCard, NotchPanel } from "@/components/landing/notch";
 import { Column, Pill, SectionHeading } from "@/components/landing/primitives";
 import { HelixVisual } from "@/components/landing/visuals";
 import { liveIntro, liveMeeting, liveTabDuration, liveTabs } from "@/data/call-stages";
@@ -76,7 +76,7 @@ export function LiveCall() {
 
           <div className="relative h-[360px] overflow-hidden bg-[linear-gradient(180deg,#a9d8f5_0%,#2f7fd6_45%,#0b3a8a_75%,#04122e_100%)] sm:h-[427px] lg:col-span-2">
             <div className="absolute top-0 left-1/2 -translate-x-1/2">
-              <Notch time={liveMeeting.time} battery={liveMeeting.battery} width={300}>
+              <NotchPanel time={liveMeeting.time} battery={liveMeeting.battery} className="w-[280px]">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={tab.id}
@@ -91,7 +91,7 @@ export function LiveCall() {
                     ))}
                   </motion.div>
                 </AnimatePresence>
-              </Notch>
+              </NotchPanel>
             </div>
             <div className="absolute right-4 bottom-4 left-4 rounded-xl bg-white/10 p-3 text-white backdrop-blur-md sm:right-auto sm:w-[260px]">
               <div className="text-[13px] font-semibold">{liveMeeting.title}</div>
