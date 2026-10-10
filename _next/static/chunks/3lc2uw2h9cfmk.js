@@ -1,1 +1,0 @@
-(globalThis.TURBOPACK||(globalThis.TURBOPACK=[])).push(["object"==typeof document?document.currentScript:void 0,21719,t=>{t.q("/techstartsUrla/_next/static/media/qullaq.43w5i0s3msl9_.svg")}]);
